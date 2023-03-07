@@ -1,0 +1,5 @@
+2023/03/06 14:46
+Szóval ez azért van, hogy a python botokhoz legyen valami alap és tudjak dolgozni. Illetve Githubon is legyen mentés illetve a Githubra való mentést is gyakorlom
+
+2023/03/07 23:47
+Mai nap írtam bele a intents sort a botba. Illetve neveztem át a jegyzetet naplóvá.

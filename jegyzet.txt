@@ -1,2 +1,0 @@
-2023/03/06 14:46
-Szóval ez azért van, hogy a python botokhoz legyen valami alap és tudjak dolgozni. Illetve Githubon is legyen mentés illetve a Githubra való mentést is gyakorlom
