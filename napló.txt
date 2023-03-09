@@ -3,3 +3,7 @@ Szóval ez azért van, hogy a python botokhoz legyen valami alap és tudjak dolg
 
 2023/03/07 23:47
 Mai nap írtam bele a intents sort a botba. Illetve neveztem át a jegyzetet naplóvá.
+
+2023/03/09 19:08 
+
+Sok-sok moderációs és egyéb parancs hozzáadva
