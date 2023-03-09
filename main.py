@@ -5,7 +5,7 @@ intents = discord.Intents(messages=True, guilds=True)
 intents.typing = True
 intents.presences = True
 
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = commands.Bot(command_prefix='t!', intents=intents)
 
 for filename in os.listdir('./commands'):
     if filename.endswith('.py'):
