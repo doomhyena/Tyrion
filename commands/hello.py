@@ -1,6 +1,5 @@
 import nextcord
 from nextcord.ext import commands
-bot = commands.Bot(command_prefix='t!', intents= nextcord.Intents.all())
 
 class Hello(commands.Cog):
     def __init__(self, bot):

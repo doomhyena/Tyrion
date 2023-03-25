@@ -1,6 +1,5 @@
 import nextcord
 from nextcord.ext import commands
-bot = commands.Bot(command_prefix='t!', intents= nextcord.Intents.all())
 @commands.has_permissions(ban_members=True)
 
 class Ban(commands.Cog):

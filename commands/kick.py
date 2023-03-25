@@ -1,6 +1,5 @@
 import nextcord
 from nextcord.ext import commands
-bot = commands.Bot(command_prefix='t!', intents= nextcord.Intents.all())
 @commands.has_permissions(kick_members=True)
 
 class Kick(commands.Cog):
