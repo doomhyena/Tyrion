@@ -109,10 +109,12 @@ class CommandHandler(commands.Cog):
         ModEmbed.add_field(name = "/unmute/undeafen @felhasználó", value = "Unmutes/Undeafens a user in a Voice Channel!", inline = False)
         ModEmbed.add_field(name = "/voicekick @felhasználó", value = "Kirúgja a felhasználót a ", inline = False)
         
-        #Parancsok elküldése.
-        await ctx.send(embed = MyEmbed)
-        await ctx.send(embed = MusicEmbed) 
-        await ctx.send(embed = ModEmbed)   
+        #parancsok elküldése privát üzenetben
+        await ctx.send("Nézd meg a privát üzeneteid!")
+        await ctx.user.create_dm()
+        await ctx.user.dm_channel.send(embed = MyEmbed)
+        await ctx.user.dm_channel.send(embed = MusicEmbed) 
+        await ctx.user.dm_channel.send(embed = ModEmbed)   
 
     #Szerver készítéséhez való parancsok
 
@@ -213,7 +215,7 @@ class CommandHandler(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await ctx.send("Kérlek válassz ✌️/🤜/✋")
 
-    #Moderációs parancsok
+    #Moderációs
 
     @createtextchannel.error
     async def errorhandler(self, ctx : Interaction, error):
