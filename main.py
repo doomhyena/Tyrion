@@ -1,7 +1,8 @@
 import os
 import nextcord
 from nextcord.ext import commands
-intents = nextcord.Intents(messages=True, guilds=True)
+intents = nextcord.Intents.default()
+intents.message_content = True
 intents.typing = True
 intents.presences = True
 
