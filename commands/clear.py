@@ -1,6 +1,6 @@
-import discord
-from discord.ext import commands
-bot = commands.Bot(command_prefix='t!', intents= discord.Intents.all())
+import nextcord
+from nextcord.ext import commands
+bot = commands.Bot(command_prefix='t!', intents= nextcord.Intents.all())
 @commands.has_permissions(manage_messages=True)
 
 class Clear(commands.Cog):

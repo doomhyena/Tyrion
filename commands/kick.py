@@ -1,6 +1,6 @@
-import discord
-from discord.ext import commands
-bot = commands.Bot(command_prefix='t!', intents= discord.Intents.all())
+import nextcord
+from nextcord.ext import commands
+bot = commands.Bot(command_prefix='t!', intents= nextcord.Intents.all())
 @commands.has_permissions(kick_members=True)
 
 class Kick(commands.Cog):
@@ -8,7 +8,7 @@ class Kick(commands.Cog):
         self.bot = bot
 
     commands.command()
-    async def kick(ctx, member: discord.Member, *, reason=None):
+    async def kick(ctx, member: nextcord.Member, *, reason=None):
         await member.kick(reason=reason) 
         await ctx.send(f"{member.mention} ki lett rúgva. Ok: {reason}")
 

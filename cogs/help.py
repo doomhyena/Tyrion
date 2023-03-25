@@ -1,5 +1,5 @@
-from discord.ext import commands
-import discord
+from nextcord.ext import commands
+import nextcord
 
 class Help(commands.Cog):
     def __init__(self, client):
@@ -9,7 +9,7 @@ class Help(commands.Cog):
     async def help_command(self, ctx):
         """Parancsok listázása"""
 
-        embed = discord.Embed(title="Parancsok listája", description="Itt találod a használható parancsokat:", color=0x00ff00)
+        embed = nextcord.Embed(title="Parancsok listája", description="Itt találod a használható parancsokat:", color=0x00ff00)
         
         for cog in self.client.cogs:
             cog_commands = self.client.get_cog(cog).get_commands()

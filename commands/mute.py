@@ -1,6 +1,6 @@
-import discord
-from discord.ext import commands
-bot = commands.Bot(command_prefix='t!', intents= discord.Intents.all())
+import nextcord
+from nextcord.ext import commands
+bot = commands.Bot(command_prefix='t!', intents= nextcord.Intents.all())
 @commands.has_permissions(manage_roles=True)
 
 class Mute(commands.Cog):
@@ -8,8 +8,8 @@ class Mute(commands.Cog):
         self.bot = bot
 
     commands.command()
-    async def mute(ctx, member: discord.Member, *, reason=None):
-        role = discord.utils.get(ctx.guild.roles, name="Némított") 
+    async def mute(ctx, member: nextcord.Member, *, reason=None):
+        role = nextcord.utils.get(ctx.guild.roles, name="Némított") 
         if not role:
             role = await ctx.guild.create_role(name="Némított")
             for channel in ctx.guild.channels:

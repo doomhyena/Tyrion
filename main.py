@@ -1,7 +1,7 @@
 import os
-import discord
-from discord.ext import commands
-intents = discord.Intents(messages=True, guilds=True)
+import nextcord
+from nextcord.ext import commands
+intents = nextcord.Intents(messages=True, guilds=True)
 intents.typing = True
 intents.presences = True
 
@@ -14,6 +14,6 @@ for filename in os.listdir('./commands'):
 @bot.event
 async def on_ready():
     print('Bejelentkezve mint: {0} ({0.id})'.format(bot.user))
-    await bot.change_presence(activity=discord.Game(name="Kezdésnek írd be, hogy: t!segitseg"))
+    await bot.change_presence(activity=nextcord.Game(name="Kezdésnek írd be, hogy: t!segitseg"))
 
 bot.run('MTA4MjMxMjk2ODUyNTU4MjQ2Nw.GSLtzn.vSylb0vNEt1Ry3LLOHyQbiULjm9IGCBLKkbfds')
