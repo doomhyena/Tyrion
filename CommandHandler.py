@@ -110,7 +110,7 @@ class CommandHandler(commands.Cog):
         ModEmbed.add_field(name = "/voicekick @felhasználó", value = "Kirúgja a felhasználót a ", inline = False)
         
         #DM Creation
-        await ctx.send("Check your DMs!")
+        await ctx.send("Nézd meg a privát üzeneteid!")
         await ctx.user.create_dm()
         await ctx.user.dm_channel.send(embed = MyEmbed)
         await ctx.user.dm_channel.send(embed = MusicEmbed) 
@@ -118,54 +118,42 @@ class CommandHandler(commands.Cog):
 
     #Group Command EditSever
 
-    @bot.slash_command(name="servername", description="Edits the Server Name")
+    @bot.slash_command(name="createtextchannel", description="Egy szöveges csatornát készít")
     @application_checks.has_permissions(manage_guild = True)
-    async def servername(self,ctx : Interaction,*,input : str = SlashOption(description="Server Name")):
-        await ctx.guild.edit(name = input)
-        await ctx.send(f"Server Name Changed to {input}")
-
-    @bot.slash_command(name="region", description="Edits the Server Region")
-    @application_checks.has_permissions(manage_guild = True)
-    async def region(self,ctx : Interaction,*,input : str = SlashOption(description="Region Name")):
-        await ctx.guild.edit(region = input)
-        await ctx.send(f"Server Region Changed to {input}")
-
-    @bot.slash_command(name="createtextchannel", description="Creates a Text Channel")
-    @application_checks.has_permissions(manage_guild = True)
-    async def createtextchannel(self,ctx : Interaction,*,input : str = SlashOption(description="Channel Name")):
+    async def createtextchannel(self,ctx : Interaction,*,input : str = SlashOption(description="Csatorna név")):
         await ctx.guild.create_text_channel(name = input)
-        await ctx.send(f"Text Channel Created with the name {input}")
+        await ctx.send(f"A szöveges csatorna elkészítve, {input}")
 
-    @bot.slash_command(name="createvoicechannel", description="Creates a Voice Channel")
+    @bot.slash_command(name="createvoicechannel", description="Egy hangcsatornát készít")
     @application_checks.has_permissions(manage_guild = True)
-    async def createvoicechannel(self,ctx : Interaction,*,input : str = SlashOption(description="Channel Name")):
+    async def createvoicechannel(self,ctx : Interaction,*,input : str = SlashOption(description="Csatorna név")):
         await ctx.guild.create_voice_channel(name = input)
-        await ctx.send(f"Voice Channel Created with the name {input}")
+        await ctx.send(f"A szöveges csatorna elkészítve, {input}")
 
-    @bot.slash_command(name="createrole", description="Creates a Role")
+    @bot.slash_command(name="createrole", description="Egy rangot készít")
     @application_checks.has_permissions(manage_guild = True)
-    async def createrole(self,ctx : Interaction,*,input : str = SlashOption(description="Role Name")):
+    async def createrole(self,ctx : Interaction,*,input : str = SlashOption(description="Rang név")):
         await ctx.guild.create_role(name = input)
-        await ctx.send(f"Role Created with the name {input}")
+        await ctx.send(f"A rang elkészítve, {input}")
 
     #----------------------------------------------//----------------------------------------------#
-    #Moderation Commands  
+    #Moderációs parancsok  
 
-    @bot.slash_command(name="kick", description="Kicks a user")
+    @bot.slash_command(name="kick", description="Kirúg egy felhasználót")
     @application_checks.has_permissions(kick_members = True)
-    async def kick(self,ctx : Interaction, member : nextcord.Member, *, reason = SlashOption(description="Reason to kick")):
+    async def kick(self,ctx : Interaction, member : nextcord.Member, *, reason = SlashOption(description="A kirúgás indoka")):
         await ctx.guild.kick(member, reason = reason)
-        await ctx.send(f"Kicked {member}")
+        await ctx.send(f"{member}, sikeresen kirúgva ezzel az indokkal: {reason}.")
 
-    @bot.slash_command(name="ban", description="Bans a user")
+    @bot.slash_command(name="ban", description="Kitílt egy felhasználót")
     @application_checks.has_permissions(ban_members = True)
-    async def ban(self,ctx : Interaction, member : nextcord.Member, *, reason = SlashOption(description="Reason for ban")):
+    async def ban(self,ctx : Interaction, member : nextcord.Member, *, reason = SlashOption(description="A kitíltás indoka")):
         await ctx.guild.ban(member, reason = reason)
-        await ctx.send(f"Banned {member}")
+        await ctx.send(f"{member} sikeresen kitíltva ezzel az indokkal: {reason}.")
 
-    @bot.slash_command(name="unban", description="Unbans a user")
+    @bot.slash_command(name="unban", description="Feloldja a kitíltást")
     @application_checks.has_permissions(ban_members = True)
-    async def unban(self,ctx : Interaction, *,input : str = SlashOption(description="User#XXXX")):
+    async def unban(self,ctx : Interaction, *,input : str = SlashOption(description="Felhasználó#XXXX")):
         name, discriminator = input.split("#")
         banned_members = await ctx.guild.bans()
         for bannedmember in banned_members:
@@ -173,50 +161,50 @@ class CommandHandler(commands.Cog):
             disc = bannedmember.user.discriminator
             if name == username and discriminator == disc:
                 await ctx.guild.unban(bannedmember.user)
-                await ctx.send(f"Unbanned {username}#{disc}")
+                await ctx.send(f"A felhasználó, {username}#{disc} sikeresen feloldva.")
                 
-    @bot.slash_command(name="purge", description="Purges messages from a channel")
+    @bot.slash_command(name="purge", description="X mennyiségű üzenetet töröl ki.")
     @application_checks.has_permissions(manage_messages = True)
-    async def purge(self,ctx : Interaction, amount = SlashOption(description="Amount of messages to purge"), day : int = None , month : int = None, year : int = datetime.now().year):
+    async def purge(self,ctx : Interaction, amount = SlashOption(description="üzenetmennyiség"), day : int = None , month : int = None, year : int = datetime.now().year):
         if amount == "/":
             if day == None or month == None:
                 return
             else:
                 await ctx.channel.purge(after = datetime(year, month, day))
-                await ctx.send(f"Deleted all messages after {day}/{month}/{year}")
+                await ctx.send(f"Törölted az összes üzenetet, {day}/{month}/{year}")
         else:
             await ctx.channel.purge(limit = int(amount) + 1)
-            await ctx.send(f"Deleted {amount} messages")
+            await ctx.send(f"Kitöröltél {amount} üzenetet.")
 
-    @bot.slash_command(name="mute", description="Mutes a user")
+    @bot.slash_command(name="mute", description="Lenémítja a felhasználót")
     @application_checks.has_permissions(mute_members = True)
-    async def mute(self, ctx : Interaction, user : nextcord.Member = SlashOption(description="User to mute")):
+    async def mute(self, ctx : Interaction, user : nextcord.Member = SlashOption(description="Felhasználó lenémítása")):
         await user.edit(mute = True)
         await ctx.send(f"Muted {user}")
 
-    @bot.slash_command(name="unmute", description="Unmutes a user")
+    @bot.slash_command(name="unmute", description="Feloldja a felhasználót a némítás alól.")
     @application_checks.has_permissions(mute_members = True)
-    async def unmute(self,ctx : Interaction, user : nextcord.Member = SlashOption(description="User to unmute")):
+    async def unmute(self,ctx : Interaction, user : nextcord.Member = SlashOption(description="Feloldja a felhasználót a némítás alól.")):
         await user.edit(mute = False)
-        await ctx.send(f"Unmuted {user}")
+        await ctx.send(f"A felhasználó sikeresen feloldva a némítás alól, {user}.")
 
-    @bot.slash_command(name="deafenself", description="Deafens a user")
+    @bot.slash_command(name="deafen", description="Süketíti a felhasználót.")
     @application_checks.has_permissions(deafen_members = True)
-    async def deafenself(self,ctx : Interaction, user : nextcord.Member = SlashOption(description="User to deafen")):
+    async def deafen(self,ctx : Interaction, user : nextcord.Member = SlashOption(description="Süketíti a felhasználót.")):
         await user.edit(deafen = True)
-        await ctx.send(f"Deafened {user}")
+        await ctx.send(f"A felhasználó sikeresen sűketítve, {user}.")
 
-    @bot.slash_command(name="undeafen", description="Undeafens a user")
+    @bot.slash_command(name="undeafen", description="Feloldja a süketítés alól a felhasználót.")
     @application_checks.has_permissions(deafen_members = True)
-    async def undeafen(self,ctx : Interaction, user : nextcord.Member = SlashOption(description="User to undeafen")):
+    async def undeafen(self,ctx : Interaction, user : nextcord.Member = SlashOption(description="Feloldja a süketítés alól a felhasználót.")):
         await user.edit(deafen = False)
         await ctx.send(f"Undeafened {user}")
 
-    @bot.slash_command(name="voicekick", description="Kicks a user from the Voice Channel")
+    @bot.slash_command(name="voicekick", description="Kirúgja a felhasználót a hangcsatornából.")
     @application_checks.has_permissions(kick_members = True)
-    async def voicekick(self,ctx : Interaction, user : nextcord.Member = SlashOption(description="User to kick from Voice Channel")):
+    async def voicekick(self,ctx : Interaction, user : nextcord.Member = SlashOption(description="Kirúgja a felhasználót a hangcsatornából.")):
         await user.edit(voice_channel = None)
-        await ctx.send(f"Kicked {user} from Voice Channel")
+        await ctx.send(f"{user} kirúgva a hangcsatornából.")
 
     #----------------------------------------------//----------------------------------------------#
     #Error Handlers
@@ -225,63 +213,48 @@ class CommandHandler(commands.Cog):
     @rps.error
     async def errorhandler(self, ctx : Interaction, error):
         if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send("Please Insert ✌️/🤜/✋")
+            await ctx.send("Kérlek válassz ✌️/🤜/✋")
 
     #Moderation Commands ErrorHandlers
-    @servername.error
-    async def errorhandler(self, ctx : Interaction, error):
-        if isinstance(error, commands.MissingPermissions):
-            await ctx.send("You don't have permission to do that!")
-        if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send("Server Name cant be empty!")
-
-    @region.error
-    async def errorhandler(self, ctx : Interaction, error):
-        if isinstance(error, commands.MissingPermissions):
-            await ctx.send("You don't have permission to do that!")
-        if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send("Please choose a valid region!")
-        if isinstance(error, commands.CommandInvokeError):
-            await ctx.send("Please choose a valid region!")
 
     @createtextchannel.error
     async def errorhandler(self, ctx : Interaction, error):
         if isinstance(error, commands.MissingPermissions):
-            await ctx.send("You don't have permission to do that!")
+            await ctx.send("Nincs elég jogosultságod hozzá!")
         if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send("Please enter a channel name!")
+            await ctx.send("Kérlek adjál meg egy csatornát!")
 
     @createvoicechannel.error
     async def errorhandler(self, ctx : Interaction, error):
         if isinstance(error, commands.MissingPermissions):
-            await ctx.send("You don't have permission to do that!")
+            await ctx.send("Nincs elég jogosultságod hozzá!")
         if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send("Please enter a channel name!")
+            await ctx.send("Kérlek adjál meg egy csatornát!")
 
     @kick.error
     async def errorhandler(self,ctx : Interaction, error):
         if isinstance(error, commands.MissingPermissions):
-            await ctx.send("You don't have permission to do that!")
+            await ctx.send("Nincs elég jogosultságod hozzá!")
         if isinstance(error, commands.MemberNotFound):
-            await ctx.send("Please mention a valid user!")
+            await ctx.send("Kérlek jelölj meg egy felhasználót!")
         if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send("You need to mention a user in order to use this command!")
+            await ctx.send("A parancs használatához meg kell említenie egy felhasználót!")
 
     @ban.error
     async def errorhandler(self,ctx : Interaction, error):
         if isinstance(error, commands.MissingPermissions):
-            await ctx.send("You don't have permission to do that!")
+            await ctx.send("Nincs elég jogosultságod hozzá!")
         if isinstance(error, commands.MemberNotFound):
-            await ctx.send("Please mention a valid user!")
+            await ctx.send("Kérlek jelölj meg egy felhasználót!")
         if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send("You need to mention a user in order to use this command!")
+            await ctx.send("A parancs használatához meg kell említenie egy felhasználót!")
 
     @purge.error
     async def errorhandler(self,ctx : Interaction, error):
         if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send("You have to specify either a date or an amout.")
+            await ctx.send("meg kell adnia egy dátumot vagy egy üzenetszámot!")
         if isinstance(error, commands.CommandInvokeError):
-            await ctx.send("You can only have a / or a number as the 1st input.")
+            await ctx.send("Csak egy / vagy egy számot lehet 1. beírni.")
 
         
 def setup(bot):
