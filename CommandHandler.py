@@ -76,7 +76,6 @@ class CommandHandler(commands.Cog):
 
         #Játék parancsok
         MyEmbed = nextcord.Embed(title = "Játék parancsok", description = "Itt vannak a bot játékai!", color = nextcord.Colour.orange())
-        MyEmbed.set_thumbnail(url = "https://i.pinimg.com/originals/40/b4/69/40b469afa11db730d3b9ffd57e9a3af9.jpg")
         MyEmbed.add_field(name = "/ping", value = "A bot ezzel fog válaszolni: Pong!", inline = False)
         MyEmbed.add_field(name = "/dice", value = "Ezzel a paranccsal tudsz dobókockával dobni.", inline = False)
         MyEmbed.add_field(name = "/coinflip", value = "This command lets you flip a coin", inline = False)
@@ -84,7 +83,6 @@ class CommandHandler(commands.Cog):
         
         #Zene parancsok
         MusicEmbed = nextcord.Embed(title = "Zene prancsok", description = "Itt vannak a bot zene parancsai.", color = nextcord.Colour.orange())
-        MusicEmbed.set_thumbnail(url = "https://i.pinimg.com/originals/40/b4/69/40b469afa11db730d3b9ffd57e9a3af9.jpg")
         MusicEmbed.add_field(name = "/join", value = "Ezzel a paranccsal fog a bot belépni abba a szobába amelyikben vagy! ", inline = False)
         MusicEmbed.add_field(name = "/play", value = "Ezzel a paranccsal fogsz tudni zenét lejátszani! ", inline = False)
         MusicEmbed.add_field(name = "/skip", value = "Ezzel a paranccsal nyomod tovább a zenét!", inline = False)
@@ -95,7 +93,6 @@ class CommandHandler(commands.Cog):
         
         #Moderációs parancsok
         ModEmbed = nextcord.Embed(title = "Moderációs parancsok", description = "Ezek a bot moderációs parancsai", color = nextcord.Colour.orange())
-        ModEmbed.set_thumbnail(url = "https://i.pinimg.com/originals/40/b4/69/40b469afa11db730d3b9ffd57e9a3af9.jpg")
         #ModEmbed.add_field(name = "/servername", value = "Edits the server name!", inline = False)
         #ModEmbed.add_field(name = "/region", value = "Edits the server Region!", inline = False)
         ModEmbed.add_field(name = "/createrole", value = "Egy rangot fog készíteni!", inline = False)
