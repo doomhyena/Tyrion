@@ -109,14 +109,14 @@ class CommandHandler(commands.Cog):
         ModEmbed.add_field(name = "/unmute/undeafen @felhasználó", value = "Unmutes/Undeafens a user in a Voice Channel!", inline = False)
         ModEmbed.add_field(name = "/voicekick @felhasználó", value = "Kirúgja a felhasználót a ", inline = False)
         
-        #DM Creation
+        #parancsok elküldése privát üzenetben
         await ctx.send("Nézd meg a privát üzeneteid!")
         await ctx.user.create_dm()
         await ctx.user.dm_channel.send(embed = MyEmbed)
         await ctx.user.dm_channel.send(embed = MusicEmbed) 
         await ctx.user.dm_channel.send(embed = ModEmbed)   
 
-    #Group Command EditSever
+    #Szerver készítéséhez való parancsok
 
     @bot.slash_command(name="createtextchannel", description="Egy szöveges csatornát készít")
     @application_checks.has_permissions(manage_guild = True)
@@ -207,15 +207,15 @@ class CommandHandler(commands.Cog):
         await ctx.send(f"{user} kirúgva a hangcsatornából.")
 
     #----------------------------------------------//----------------------------------------------#
-    #Error Handlers
+    #Hiba üzenetek
 
-    #Fun Commands ErrorHandlers
+    #Játék parancsok 
     @rps.error
     async def errorhandler(self, ctx : Interaction, error):
         if isinstance(error, commands.MissingRequiredArgument):
             await ctx.send("Kérlek válassz ✌️/🤜/✋")
 
-    #Moderation Commands ErrorHandlers
+    #Moderációs parancsok
 
     @createtextchannel.error
     async def errorhandler(self, ctx : Interaction, error):
