@@ -34,7 +34,7 @@ for filename in os.listdir('./commands'):
 @bot.event
 async def on_ready():
     print('Bejelentkezve mint: {0} ({0.id})'.format(bot.user))
-    await bot.change_presence(activity=nextcord.Game(name="Natsuki#5480 csicskája"))
+    await bot.change_presence(activity=nextcord.Game(name="Kezdésnek írd be, hogy: -help"))
 
 @bot.slash_command(name="reloadcommands", description="Reloads the CommandHandler")
 @application_checks.check(is_me)
