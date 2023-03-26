@@ -18,17 +18,17 @@ class Tempmute(commands.Cog):
                 embed1.set_footer(text=f"{ctx.author.name} × Hiba", icon_url=ctx.author.avatar_url)
                 await ctx.reply(embed=embed1, mention_author=False)
                 return
-            bot = await ctx.guild.fetch_member(713014602891264051)
+            bot = await ctx.guild.fetch_member(1082312968525582467)
             if member.id == ctx.author.id: await ctx.reply("<:radon_x:856423841667743804> Magadat nem tudod lenémítani!", mention_author=False); return
             if member.top_role >= ctx.author.top_role: await ctx.reply("<:radon_x:856423841667743804> A felhasználónak van egy magasabb vagy ugyan olyan rangja, mint a te legfelső rangod!", mention_author=False); return
             if bot.top_role < member.top_role: await ctx.reply("<:radon_x:856423841667743804> A botnak kisebbek a rangjai, mint a felhasználónak!", mention_author=False); return
             if not bot.guild_permissions.manage_roles: await ctx.reply("<:radon_x:856423841667743804> A botnak nincs joga rangok adásához!", mention_author=False); return
             else:
                 embed = nextcord.Embed(description=f"{member.mention} le lett némítva {ctx.author.mention} által!", color=0xff9900, timestamp=datetime.datetime.utcnow())
-                embed.set_author(name="Némítás", icon_url=ctx.author.avatar_url)
+                embed.set_author(name="Némítás", icon_url=ctx.author.display_avatar)
                 embed.add_field(name="Indok", value=f"`{reason}`")
                 embed.add_field(name="Időtartam", value=ido)
-                embed.set_footer(text=f"{ctx.author.name} × Némítás", icon_url=self.client.user.avatar_url)
+                embed.set_footer(text=f"{ctx.author.name} × Némítás", icon_url=self.bot.user.display_avatar)
                 if not nextcord.utils.get(ctx.guild.roles, name="Némított"):
                     msg = await ctx.reply("Kérlek várj, amíg létrehozom a rangot és bekonfigurálom a rendszert...", mention_author=False)
                     mutedrole = await ctx.guild.create_role(name="Némított", colour=0xff9900, reason=f"Némítás - {ctx.author.name} - Egyszeri alkalom")

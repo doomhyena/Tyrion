@@ -14,14 +14,14 @@ class Iq(commands.Cog):
                                     description=f"{ctx.author.mention} IQ-ja: **{random.randint(60, 230)}** IQ pont. Büszkék vagyunk rád.",
                                     color=0xe9b703,
                                     timestamp=datetime.datetime.utcnow())
-            embed.set_footer(text="Radon × IQ", icon_url=ctx.author.avatar_url)
+            embed.set_footer(text="Radon × IQ", icon_url=ctx.author.display_avatar)
             await ctx.reply(embed=embed, mention_author=False)
         else:
             try:
                 member = await commands.MemberConverter().convert(ctx, member)
             except: 
                 embed = nextcord.Embed(description="Nem található ilyen felhasználó! <:radon_x:811191514482212874>", color=0xFF9900, timestamp=datetime.datetime.utcnow())
-                embed.set_author(name=f"Radon × Hiba", icon_url=ctx.author.avatar_url)
+                embed.set_author(name=f"Radon × Hiba", icon_url=ctx.author.display_avatar)
                 await ctx.reply(embed=embed)
                 return
             embed = nextcord.Embed(title="IQ", description=f"{member.mention} IQ-ja: **{random.randint(60, 170)}** IQ pont. Büszkék vagyunk rád.", color=0xe9b703, timestamp=datetime.datetime.utcnow())
