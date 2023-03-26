@@ -93,8 +93,6 @@ class CommandHandler(commands.Cog):
         
         #Moderációs parancsok
         ModEmbed = nextcord.Embed(title = "Moderációs parancsok", description = "Ezek a bot moderációs parancsai", color = nextcord.Colour.orange())
-        #ModEmbed.add_field(name = "/servername", value = "Edits the server name!", inline = False)
-        #ModEmbed.add_field(name = "/region", value = "Edits the server Region!", inline = False)
         ModEmbed.add_field(name = "/createrole", value = "Egy rangot fog készíteni!", inline = False)
         ModEmbed.add_field(name = "/createtextchannel és /createvoicechannel", value = "Készít egy szöveges/hangcsatornát!", inline = False)
         ModEmbed.add_field(name = "/ban @felhasználó", value = "Kitíltja a felhasználót a szerverről!", inline = False)
@@ -103,7 +101,7 @@ class CommandHandler(commands.Cog):
         ModEmbed.add_field(name = "/deafen @felhasználór", value = "Sűketíti a felhasználót egy hangcsatornában!", inline = False)
         ModEmbed.add_field(name = "/purge szám", value = "X mennyiségű üzenetet fog törölni!", inline = False)
         ModEmbed.add_field(name = "/unban felhasználó#XXXX", value = "Ezzel a paranccsal visszavonod a parancsot!", inline = False)
-        ModEmbed.add_field(name = "/unmute/undeafen @felhasználó", value = "Unmutes/Undeafens a user in a Voice Channel!", inline = False)
+        ModEmbed.add_field(name = "/unmute és /undeafen @felhasználó", value = "Unmutes/Undeafens a user in a Voice Channel!", inline = False)
         ModEmbed.add_field(name = "/voicekick @felhasználó", value = "Kirúgja a felhasználót a ", inline = False)
         
         #parancsok elküldése privát üzenetben
