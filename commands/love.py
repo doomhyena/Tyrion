@@ -12,7 +12,7 @@ class Love(commands.Cog):
         async def love(self, ctx, member1, member2):
             try: member1 = await commands.MemberConverter().convert(ctx, member1); member2 = await commands.MemberConverter().convert(ctx, member2)
             except: 
-                embed = nextcord.Embed(description="Nem található ilyen felhasználó! <:radon_x:811191514482212874>", color=0xFF9900, timestamp=datetime.datetime.utcnow())
+                embed = nextcord.Embed(description="Nem található ilyen felhasználó!", color=0xFF9900, timestamp=datetime.datetime.utcnow())
                 embed.set_author(name=f"Tyrion × Hiba", icon_url=ctx.author.display_avatar)
                 await ctx.reply(embed=embed)
                 return

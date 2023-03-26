@@ -16,7 +16,7 @@ class Unban(commands.Cog):
             if user.isdigit() == False: 
                 lista = user.split('#')
                 if len(lista) != 2: 
-                    embed = nextcord.Embed(description="Nem található ilyen felhasználó a kitiltottak listáján! <:radon_x:811191514482212874>", color=0xff9900, timestamp=datetime.datetime.utcnow())
+                    embed = nextcord.Embed(description="Nem található ilyen felhasználó a kitiltottak listáján!", color=0xff9900, timestamp=datetime.datetime.utcnow())
                     embed.set_author(name=f"Hiba × {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.display_avatar)
                     await ctx.reply(embed=embed, mention_author=False)
                     return
@@ -35,7 +35,7 @@ class Unban(commands.Cog):
                             asd = True
                             await user.send(f"A kitiltásod feloldották a **{ctx.author.guild_name}** szerveren!")
                     if asd == False:                         
-                        embed = nextcord.Embed(description="Nem található ilyen felhasználó a kitiltottak listáján! <:radon_x:811191514482212874>", color=0xff9900, timestamp=datetime.datetime.utcnow())
+                        embed = nextcord.Embed(description="Nem található ilyen felhasználó a kitiltottak listáján!", color=0xff9900, timestamp=datetime.datetime.utcnow())
                         embed.set_author(name=f"Hiba × {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.display_avatar)
                         await ctx.reply(embed=embed, mention_author=False)
                         return
@@ -43,7 +43,7 @@ class Unban(commands.Cog):
                 banned_users = await ctx.guild.bans()
                 lista = [b.user.id for b in banned_users]
                 if int(user) not in lista: 
-                    embed = nextcord.Embed(description="Nem található ilyen felhasználó a kitiltottak listáján! <:radon_x:811191514482212874>", color=0xff9900, timestamp=datetime.datetime.utcnow())
+                    embed = nextcord.Embed(description="Nem található ilyen felhasználó a kitiltottak listáján!", color=0xff9900, timestamp=datetime.datetime.utcnow())
                     embed.set_author(name=f"Hiba × {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.display_avatar)
                     await ctx.reply(embed=embed, mention_author=False)
                     return

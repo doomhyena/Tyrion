@@ -15,24 +15,24 @@ class Addrole(commands.Cog):
         else:
             try: user = await commands.MemberConverter().convert(ctx, user)
             except: 
-                embed = nextcord.Embed(description="Nem található ilyen felhasználó a szerveren! <:radon_x:811191514482212874>", color=0xff9900, timestamp=datetime.datetime.utcnow())
+                embed = nextcord.Embed(description="Nem található ilyen felhasználó a szerveren!", color=0xff9900, timestamp=datetime.datetime.utcnow())
                 embed.set_author(name=f"Hiba × {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.display_avatar)
                 await ctx.reply(embed=embed, mention_author=False)
                 return
             try: role = await commands.RoleConverter().convert(ctx, role)
             except:
-                embed = nextcord.Embed(description="Nem található ilyen rang a szerveren! <:radon_x:811191514482212874>", color=0xff9900, timestamp=datetime.datetime.utcnow())
+                embed = nextcord.Embed(description="Nem található ilyen rang a szerveren!", color=0xff9900, timestamp=datetime.datetime.utcnow())
                 embed.set_author(name=f"Hiba × {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.display_avatar)
                 await ctx.reply(embed = embed, mention_author=False)
                 return
             if ctx.author.id == user.id: 
-                embed = nextcord.Embed(description="Nem adhatsz magadnak rangot! <:radon_x:811191514482212874>", color=0xff9900, timestamp=datetime.datetime.utcnow())
+                embed = nextcord.Embed(description="Nem adhatsz magadnak rangot!", color=0xff9900, timestamp=datetime.datetime.utcnow())
                 embed.set_author(name=f"Hiba × {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.display_avatar)
                 await ctx.reply(embed=embed, mention_author=False)
                 return
             elif ctx.author.guild.owner == False:
                 if ctx.author.top_role < role: 
-                    embed = nextcord.Embed(description="Ez a rang magasabb mint a te rangod, ezért nem adhatod oda másnak! <:radon_x:811191514482212874>", color=0xff9900, timestamp=datetime.datetime.utcnow())
+                    embed = nextcord.Embed(description="Ez a rang magasabb mint a te rangod, ezért nem adhatod oda másnak!", color=0xff9900, timestamp=datetime.datetime.utcnow())
                     embed.set_author(name=f"Hiba × {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.display_avatar)
                     await ctx.reply(embed=embed, mention_author=False)
                     return
@@ -40,7 +40,7 @@ class Addrole(commands.Cog):
                 pass
             bot = await commands.MemberConverter().convert(ctx, str(713014602891264051))
             if bot.guild_permissions.manage_roles == False: 
-                embed = nextcord.Embed(description="Nincs jogosultságom a felhasználó kezelésére! <:radon_x:811191514482212874>", color=0xff9900, timestamp=datetime.datetime.utcnow())
+                embed = nextcord.Embed(description="Nincs jogosultságom a felhasználó kezelésére!", color=0xff9900, timestamp=datetime.datetime.utcnow())
                 embed.set_author(name=f"Hiba × {ctx.author.name}#{ctx.author.discriminator}", icon_url=ctx.author.display_avatar)
                 await ctx.reply(embed=embed, mention_author=False)
                 return

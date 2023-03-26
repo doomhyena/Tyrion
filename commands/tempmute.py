@@ -13,16 +13,16 @@ class Tempmute(commands.Cog):
         if ctx.author.guild_permissions.kick_members:
             try: member = await commands.MemberConverter().convert(ctx, member)
             except: 
-                embed1 = nextcord.Embed(description="Nem található ilyen felhasználó a szerveren! <:radon_x:811191514482212874>", color=0xff9900, timestamp=datetime.datetime.utcnow())
+                embed1 = nextcord.Embed(description="Nem található ilyen felhasználó a szerveren!", color=0xff9900, timestamp=datetime.datetime.utcnow())
                 embed1.set_author(name="Hiba!", icon_url=self.client.user.avatar_url)
                 embed1.set_footer(text=f"{ctx.author.name} × Hiba", icon_url=ctx.author.avatar_url)
                 await ctx.reply(embed=embed1, mention_author=False)
                 return
             bot = await ctx.guild.fetch_member(1082312968525582467)
-            if member.id == ctx.author.id: await ctx.reply("<:radon_x:856423841667743804> Magadat nem tudod lenémítani!", mention_author=False); return
-            if member.top_role >= ctx.author.top_role: await ctx.reply("<:radon_x:856423841667743804> A felhasználónak van egy magasabb vagy ugyan olyan rangja, mint a te legfelső rangod!", mention_author=False); return
-            if bot.top_role < member.top_role: await ctx.reply("<:radon_x:856423841667743804> A botnak kisebbek a rangjai, mint a felhasználónak!", mention_author=False); return
-            if not bot.guild_permissions.manage_roles: await ctx.reply("<:radon_x:856423841667743804> A botnak nincs joga rangok adásához!", mention_author=False); return
+            if member.id == ctx.author.id: await ctx.reply("Magadat nem tudod lenémítani!", mention_author=False); return
+            if member.top_role >= ctx.author.top_role: await ctx.reply(" A felhasználónak van egy magasabb vagy ugyan olyan rangja, mint a te legfelső rangod!", mention_author=False); return
+            if bot.top_role < member.top_role: await ctx.reply("A botnak kisebbek a rangjai, mint a felhasználónak!", mention_author=False); return
+            if not bot.guild_permissions.manage_roles: await ctx.reply("A botnak nincs joga rangok adásához!", mention_author=False); return
             else:
                 embed = nextcord.Embed(description=f"{member.mention} le lett némítva {ctx.author.mention} által!", color=0xff9900, timestamp=datetime.datetime.utcnow())
                 embed.set_author(name="Némítás", icon_url=ctx.author.display_avatar)
