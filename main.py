@@ -11,7 +11,6 @@ intents.presences = True
 bot = commands.Bot(command_prefix='-', help_command=None, intents=intents)
 
 bot.load_extension("CommandHandler")
-bot.load_extension("MusicBot")
 
 def is_me(ctx: Interaction):
     return ctx.message.author.id == 864583234158460938 or ctx.message.author.id == 1056315640048263230
