@@ -63,35 +63,6 @@ class CommandHandler(commands.Cog):
         else: 
             await ctx.send("Kérlek játsz helyesen")
 
-    @bot.slash_command(name ="help", description="A bot parancsait mutatja meg")
-    async def help(self,ctx : Interaction):
-
-        #Játék parancsok
-        MyEmbed = nextcord.Embed(title = "Játék parancsok", description = "Itt vannak a bot játékai!", color = nextcord.Colour.orange())
-        MyEmbed.add_field(name = "/ping", value = "A bot ezzel fog válaszolni: Pong!", inline = False)
-        MyEmbed.add_field(name = "/dice", value = "Ezzel a paranccsal tudsz dobókockával dobni.", inline = False)
-        MyEmbed.add_field(name = "/coinflip", value = "This command lets you flip a coin", inline = False)
-        MyEmbed.add_field(name = "/rps ✌️/🤜/✋", value = "Ezzel a paranccsal tudsz kő papír ollót játszani a bottal", inline = False)
-        
-        #Moderációs parancsok
-        ModEmbed = nextcord.Embed(title = "Moderációs parancsok", description = "Ezek a bot moderációs parancsai", color = nextcord.Colour.orange())
-        ModEmbed.add_field(name = "/createrole", value = "Egy rangot fog készíteni!", inline = False)
-        ModEmbed.add_field(name = "/createtextchannel és /createvoicechannel", value = "Készít egy szöveges/hangcsatornát!", inline = False)
-        ModEmbed.add_field(name = "/ban @felhasználó", value = "Kitíltja a felhasználót a szerverről!", inline = False)
-        ModEmbed.add_field(name = "/kick @felhasználó", value = "Kirúgja az adott felhasználót a szerverrről!", inline = False)
-        ModEmbed.add_field(name = "/mute @felhasználó", value = "Némítja a felhasználót!", inline = False)
-        ModEmbed.add_field(name = "/deafen @felhasználór", value = "Sűketíti a felhasználót egy hangcsatornában!", inline = False)
-        ModEmbed.add_field(name = "/purge szám", value = "X mennyiségű üzenetet fog törölni!", inline = False)
-        ModEmbed.add_field(name = "/unban felhasználó#XXXX", value = "Ezzel a paranccsal visszavonod a parancsot!", inline = False)
-        ModEmbed.add_field(name = "/unmute és /undeafen @felhasználó", value = "Unmutes/Undeafens a user in a Voice Channel!", inline = False)
-        ModEmbed.add_field(name = "/voicekick @felhasználó", value = "Kirúgja a felhasználót a ", inline = False)
-        
-        #parancsok elküldése privát üzenetben
-        await ctx.send("Nézd meg a privát üzeneteid!")
-        await ctx.user.create_dm()
-        await ctx.user.dm_channel.send(embed = MyEmbed)
-        await ctx.user.dm_channel.send(embed = ModEmbed)   
-
     #Szerver készítéséhez való parancsok
 
     @bot.slash_command(name="createtextchannel", description="Egy szöveges csatornát készít")
