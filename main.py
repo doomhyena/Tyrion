@@ -2,10 +2,22 @@ import nextcord
 import os
 from nextcord import Interaction, SlashOption, ChannelType
 from nextcord.ext import commands, application_checks
+
 intents = nextcord.Intents.default()
+
 intents.message_content = True
 intents.typing = True
 intents.presences = True
+intents.members=True
+intents.guilds=True
+intents.voice_states=True
+intents.messages = True
+intents.bans = True
+intents.dm_messages = True
+intents.reactions = True
+intents.messages = True
+intents.guilds = True
+intents.reactions = True
 
 
 bot = commands.Bot(command_prefix='-', help_command=None, intents=intents)
