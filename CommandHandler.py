@@ -6,7 +6,7 @@ from nextcord.ext import commands, application_checks
 
 intents = nextcord.Intents().all()
 
-bot = commands.Bot(command_prefix = ".ds ", help_command = None, intents = intents)
+bot = commands.Bot(command_prefix = "-", help_command = None, intents = intents)
 
 class CommandHandler(commands.Cog):
     
@@ -27,16 +27,8 @@ class CommandHandler(commands.Cog):
             await ctx.send("Írás!")
 
     @bot.slash_command(name = "dice", description="Dobj kockával. Például: 1k6  azaz egy kockával dobsz hatszor")
-    async def dice(self, ctx : Interaction, dice: str = SlashOption(description="Dobj kockával. Például: 1k6  azaz egy kockával dobsz hatszor")):
-        """Az elfogadott formátum 1k6"""
-        try:
-            rolls, limit = map(int, dice.split('k'))
-        except Exception:
-            await ctx.send('A formátumnak `NkN`-nek kell lennie!')
-            return
-
-        result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
-        await ctx.send(result)
+    async def dice(self, ctx : Interaction):
+        await ctx.send(f"🎲 {random.randint(1, 6)}")
 
     @bot.slash_command(name = "rps", description="Kő papír olló játék")
     async def rps(self,ctx : Interaction, hand : str = SlashOption(description="Válassz ezek közül: ✌️, ✋ vagy 🤜")):
