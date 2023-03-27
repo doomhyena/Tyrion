@@ -8,7 +8,7 @@ intents = nextcord.Intents().all()
 
 bot = commands.Bot(command_prefix = "-", help_command = None, intents = intents)
 
-class CommandHandler(commands.Cog):
+class SlashCommands(commands.Cog):
     
     def __init__(self, bot):
         self.bot = bot
@@ -205,4 +205,4 @@ class CommandHandler(commands.Cog):
 
         
 def setup(bot):
-    bot.add_cog(CommandHandler(bot))
+    bot.add_cog(SlashCommands(bot))

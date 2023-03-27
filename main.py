@@ -4,26 +4,12 @@ import datetime
 from nextcord import Interaction, SlashOption, ChannelType
 from nextcord.ext import commands, application_checks
 
-intents = nextcord.Intents.default()
-
-intents.message_content = True
-intents.typing = True
-intents.presences = True
-intents.members=True
-intents.guilds=True
-intents.voice_states=True
-intents.messages = True
-intents.bans = True
-intents.dm_messages = True
-intents.reactions = True
-intents.messages = True
-intents.guilds = True
-intents.reactions = True
-
+intents = nextcord.Intents().all()
 
 bot = commands.Bot(command_prefix='-', help_command=None, intents=intents)
 
-bot.load_extension("CommandHandler")
+bot.load_extension("SlashCommands")
+bot.load_extension("Commands")
 
 def is_me(ctx: Interaction):
     return ctx.message.author.id == 864583234158460938 or ctx.message.author.id == 1056315640048263230
