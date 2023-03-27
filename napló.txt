@@ -5,5 +5,7 @@ Szóval ez azért van, hogy a python botokhoz legyen valami alap és tudjak dolg
 Mai nap írtam bele a intents sort a botba. Illetve neveztem át a jegyzetet naplóvá.
 
 2023/03/09 19:08 
-
 Sok-sok moderációs és egyéb parancs hozzáadva
+
+2023/03/27 12:36
+Rengeteg új moderációs parancs került be megint illetve játék és perjeles parancsok
