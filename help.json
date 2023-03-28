@@ -1,0 +1,31 @@
+{
+    "Moderációs parancsok" : {
+        "addrole" : "Rangot ad a felhasználónak",
+        "ban" : "Kitíltja a felhasználót",
+        "clear" : "Üzeneteket töröl",
+        "setnickname" : "Becenevet állít be",
+        "kick" : "Kirúgja a felhasználót",
+        "mute" : "Némítja a felhasználót",
+        "removerole" : "Levesz egy adott rangot a felhasználóról",
+        "removeroleall" : "Leveszi az összes felhasználóról",
+        "roleall" : "Egy adott rangot ad a felhasználónak",
+        "softban" : "Kitíltja a felhasználót",
+        "tempban" : "Kitíltja a felhasználót",
+        "tempmute" : "Kitíltja a felhasználót",
+        "ticket" : "Kitíltja a felhasználót",
+        "unban" : "Kitíltja a felhasználót",
+        "unbanall" : "Kitíltja a felhasználót",
+        "warn" : "Kitíltja a felhasználót"
+    },
+    "Fun parancsok" : {
+        "coinflip" : "Rangot ad a felhasználónak",
+        "dice" : "Rangot ad a felhasználónak",
+        "iq" : "Rangot ad a felhasználónak",
+        "love" : "Rangot ad a felhasználónak"
+    },
+    "Információs parancsok" : {
+        "botinfó" : "Rangot ad a felhasználónak",
+        "emojiinfo" : "Rangot ad a felhasználónak",
+        "ping" : "Rangot ad a felhasználónak"
+    }
+}

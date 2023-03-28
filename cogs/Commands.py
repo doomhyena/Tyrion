@@ -9,6 +9,7 @@ import psutil
 import platform
 from nextcord import *
 from nextcord.ext import commands
+from nextcord.ui import Button, View
 
 intents = nextcord.Intents().all()
 
@@ -542,24 +543,23 @@ class Commands(commands.Cog):
     async def botinfó(self, ctx):
         pythonVersion = platform.python_version()
         dpyVersion = nextcord.__version__
-        serverCount = len(self.client.guilds)
-        memberCount = len(set(self.client.get_all_members()))
-        channelCount = len(set(self.client.get_all_channels()))
-        embed = nextcord.Embed(description="A Radon bot információi", color=0xFF9900, timestamp=datetime.datetime.utcnow())
-        embed.add_field(name="Bot neve", value="Radon", inline=True)
-        embed.add_field(name="Készült", value="2021.02.03", inline=True)
+        serverCount = len(self.bot.guilds)
+        memberCount = len(set(self.bot.get_all_members()))
+        channelCount = len(set(self.bot.get_all_channels()))
+        embed = nextcord.Embed(description="A Rebus bot információi", color=0xFF9900, timestamp=datetime.datetime.utcnow())
+        embed.add_field(name="Bot neve", value="Rebus", inline=True)
+        embed.add_field(name="Készült", value="2023.03.26", inline=True)
         embed.add_field(name="Programozási könytár", value="Nextcord")
         embed.add_field(name="Szerverek", value=f"{serverCount}")
         embed.add_field(name="Csatornák", value=f"{channelCount}")
         embed.add_field(name="Felhasználók", value=f"{memberCount}")
         embed.add_field(name="Python verzió", value=f"{pythonVersion}")
         embed.add_field(name="Parancsok száma", value=f"{len(self.bot.commands)}")
-        embed.add_field(name="Nextcord verzió", value=f"{dpyVersion}")
         embed.add_field(name="Operációs rendszer", value=f"Debian 10")
         embed.add_field(name="CPU kihasználtság", value=f"{psutil.cpu_percent()}%")
         embed.add_field(name="Memória kihasználtság", value=f"{psutil.virtual_memory().percent}%")
-        embed.set_author(name="Bot információi", icon_url=ctx.author.avatar_url)
-        embed.set_footer(text=f"{ctx.author.name} × Bot infók", icon_url=self.bot.user.avatar_url)
+        embed.set_author(name="Bot információi", icon_url=ctx.author.display_avatar)
+        embed.set_footer(text=f"{ctx.author.name} × Bot infók", icon_url=self.bot.user.display_avatar)
         await ctx.reply(embed=embed, mention_author=False)
 
 
@@ -587,28 +587,58 @@ class Commands(commands.Cog):
         async def ping(ctx):
             await ctx.send(f"{self.bot.latency * 1000:.0f}ms")
 
-# tulajdonosi parancsok
+helpGuide = json.load(open('./help.json'))
+def createHelpEmbed(pageNum=0, inline=False):
+	pageNum = (pageNum) % len(list(helpGuide))
+	pageTitle = list(helpGuide)[pageNum]
+	embed=Embed(color=0x0080ff, title=pageTitle)
+	for key, val in helpGuide[pageTitle].items():
+		embed.add_field(name=bot.command_prefix+key, value=val, inline=inline)
+		embed.set_footer(text=f"Page {pageNum+1} of {len(list(helpGuide))}")
+	return embed
 
-        @bot.command(usage=["eval [parancs]"])
-        async def eval(ctx, *, command):
-            if ctx.message.author.id == 864583234158460938 or 1056315640048263230 or 452133888047972352:
-                res = eval(command)
-                if inspect.isawaitable(res):
-                    await ctx.send(await res)
-            else:
-             await ctx.send(res)
 
-        @bot.command()
+@bot.command(name="help")
+async def help(ctx):
+	currentPage = 0
+
+	async def next_callback(interaction):
+		nonlocal currentPage, sent_msg
+		currentPage += 1
+		await sent_msg.edit(embed=createHelpEmbed(pageNum=currentPage), view=myview)
+
+	async def previous_callback(interaction):
+		nonlocal currentPage, sent_msg
+		currentPage -= 1
+		await sent_msg.edit(embed=createHelpEmbed(pageNum=currentPage), view=myview)
+
+	previousButton = Button(label="<", style=ButtonStyle.blurple)
+	nextButton = Button(label=">", style=ButtonStyle.blurple)
+	previousButton.callback = previous_callback
+	nextButton.callback =  next_callback
+
+	myview = View(timeout=180)
+	myview.add_item(previousButton)
+	myview.add_item(nextButton)
+
+
+	sent_msg = await ctx.send(embed=createHelpEmbed(currentPage), view=myview)
+        
+@commands.command(usage=["eval [parancs]"])
+async def eval(ctx, *, command):
+    if ctx.message.author.id == 864583234158460938 or 1056315640048263230 or 452133888047972352:
+        res = eval(command)
+        if inspect.isawaitable(res):
+            await ctx.send(await res)
+    else:
+        await ctx.send(res)
+
+        @commands.command()
         async def serverlist(ctx):
             if ctx.author.id == 864583234158460938 or ctx.author.id == 1056315640048263230 or ctx.author.id == 452133888047972352:
                 for guild in bot.guilds:
                     print(f"{guild.name} ({len(guild.members)})")
                     await ctx.message.delete()
-
-        commands.command()
-        async def ping(ctx):
-            if ctx.author.id == 864583234158460938 or ctx.author.id == 1056315640048263230 or ctx.author.id == 452133888047972352:
-                ctx.send(f"{self.bot.latency * 1000:.0f}ms")
 
 def setup(bot):
     bot.add_cog(Commands(bot))
