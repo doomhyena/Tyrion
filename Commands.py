@@ -610,15 +610,5 @@ class Commands(commands.Cog):
             if ctx.author.id == 864583234158460938 or ctx.author.id == 1056315640048263230 or ctx.author.id == 452133888047972352:
                 ctx.send(f"{self.bot.latency * 1000:.0f}ms")
 
-
-
-
-
-
-
-
-
-
-
 def setup(bot):
     bot.add_cog(Commands(bot))
