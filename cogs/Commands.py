@@ -597,32 +597,7 @@ def createHelpEmbed(pageNum=0, inline=False):
 		embed.set_footer(text=f"Page {pageNum+1} of {len(list(helpGuide))}")
 	return embed
 
-
-@bot.command(name="help")
-async def help(ctx):
-	currentPage = 0
-
-	async def next_callback(interaction):
-		nonlocal currentPage, sent_msg
-		currentPage += 1
-		await sent_msg.edit(embed=createHelpEmbed(pageNum=currentPage), view=myview)
-
-	async def previous_callback(interaction):
-		nonlocal currentPage, sent_msg
-		currentPage -= 1
-		await sent_msg.edit(embed=createHelpEmbed(pageNum=currentPage), view=myview)
-
-	previousButton = Button(label="<", style=ButtonStyle.blurple)
-	nextButton = Button(label=">", style=ButtonStyle.blurple)
-	previousButton.callback = previous_callback
-	nextButton.callback =  next_callback
-
-	myview = View(timeout=180)
-	myview.add_item(previousButton)
-	myview.add_item(nextButton)
-
-
-	sent_msg = await ctx.send(embed=createHelpEmbed(currentPage), view=myview)
+# Tulajdonosi parancsok
         
 @commands.command(usage=["eval [parancs]"])
 async def eval(ctx, *, command):

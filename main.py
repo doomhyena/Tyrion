@@ -6,7 +6,9 @@ from nextcord.ext import commands, application_checks
 
 intents = nextcord.Intents().all()
 
-bot = commands.Bot(command_prefix='-', help_command=None, intents=intents)
+bot = commands.Bot(command_prefix='-', intents=intents)
+
+bot.remove_command("help")
 
 def is_me(ctx: Interaction):
     return ctx.message.author.id == 864583234158460938 or ctx.message.author.id == 1056315640048263230
@@ -22,14 +24,14 @@ async def on_command_error(ctx, error):
     command = bot.get_command(str(ctx.message.content).replace(",", ""))
     if isinstance(error, commands.MissingRequiredArgument):
         if command.usage == None: command.usage = "Nincs használat megadva."
-        embed = nextcord.Embed(title="<:radon_x:856423841667743804> Helytelen használat!", description=f"`Használat: {command.usage}`", color=nextcord.Colour.red(), timestamp=datetime.datetime.utcnow())
+        embed = nextcord.Embed(title="Helytelen használat!", description=f"`Használat: {command.usage}`", color=nextcord.Colour.red(), timestamp=datetime.datetime.utcnow())
         await ctx.reply(embed=embed, mention_author=False)
     elif isinstance(nextcord, commands.BotMissingPermissions):
-        embed = nextcord.Embed(title="<:radon_x:856423841667743804> Hiányzó jogosultság", description=f"A botnak nincs elegendő jogosultsága!", color=nextcord.Colour.red(), timestamp=datetime.datetime.utcnow())
+        embed = nextcord.Embed(title="Hiányzó jogosultság", description=f"A botnak nincs elegendő jogosultsága!", color=nextcord.Colour.red(), timestamp=datetime.datetime.utcnow())
         await ctx.reply(embed=embed, mention_author=False)
     elif isinstance(error, commands.BadArgument):
         if command.usage == None: command.usage = "Nincs használat megadva."
-        embed = nextcord.Embed(title="<:radon_x:856423841667743804> Helytelen használat!", description=f"`Használat: {command.usage}`", color=nextcord.Colour.red(), timestamp=datetime.datetime.utcnow())
+        embed = nextcord.Embed(title="Helytelen használat!", description=f"`Használat: {command.usage}`", color=nextcord.Colour.red(), timestamp=datetime.datetime.utcnow())
         await ctx.reply(embed=embed, mention_author=False)
     elif isinstance(error, commands.CommandOnCooldown):
         cd = round(error.retry_after)
@@ -42,7 +44,7 @@ async def on_command_error(ctx, error):
         embed = nextcord.Embed(title="Hiba történt!", description=f"Ismeretlen hiba történt! `{error}`", color=nextcord.Colour.red(), timestamp=datetime.datetime.utcnow())
         await ctx.reply(embed=embed, mention_author=False)
     elif isinstance(error, commands.MissingPermissions):
-        embed = nextcord.Embed(title="<:radon_x:856423841667743804> Hiba", description=f"Nincs jogod a parancs használatához! Ehhez kell: `{error.missing_perms}`", color=nextcord.Color.red(), timestamp=datetime.datetime.utcnow())
+        embed = nextcord.Embed(title="Hiba", description=f"Nincs jogod a parancs használatához! Ehhez kell: `{error.missing_perms}`", color=nextcord.Color.red(), timestamp=datetime.datetime.utcnow())
         embed.set_footer(text="Radon × Hiányzó jog", icon_url=ctx.author.avatar_url)
         await ctx.send(embed=embed, mention_author=False)
     elif isinstance(error, commands.ChannelNotFound):
@@ -74,6 +76,17 @@ for filename in os.listdir('./cogs'):
             try: bot.load_extension(f"cogs.{filename[:-3]}")
             except Exception as e: 
                 print(f"Hiba történt!\n{e}")
+
+import sys
+
+async def setup():
+    print("[INFO] ~> Parancsfájlok betöltése")
+    for filename in os.listdir('./cogs'):
+        if filename.endswith('.py'):
+            try: bot.load_extension(f"cogs.{filename[:-3]}")
+            except Exception as e: 
+                print(f"Hiba történt!\n{e}")
+                sys.exit()
 
 
 @bot.slash_command(name="reloadcommands", description="Reloads the CommandHandler")
