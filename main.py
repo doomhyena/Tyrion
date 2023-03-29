@@ -95,4 +95,6 @@ async def reloadcommands(ctx: Interaction):
     await ctx.send("Reloading CommandHandler")
     bot.reload_extension("CommandHandler")
 
-bot.run('MTA4MjMxMjk2ODUyNTU4MjQ2Nw.GSLtzn.vSylb0vNEt1Ry3LLOHyQbiULjm9IGCBLKkbfds')
+
+bot.run('MTAyOTA2MjAyMTU0MDQ3OTA0Ng.GQQgeu.XN5sPSbFwUNCX-QEg02Y3AmoUZUIyKjhdkfnGc') # Dev Bot
+# bot.run('MTA4MjMxMjk2ODUyNTU4MjQ2Nw.GSLtzn.vSylb0vNEt1Ry3LLOHyQbiULjm9IGCBLKkbfds')
