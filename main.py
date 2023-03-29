@@ -45,7 +45,7 @@ async def on_command_error(ctx, error):
         await ctx.reply(embed=embed, mention_author=False)
     elif isinstance(error, commands.MissingPermissions):
         embed = nextcord.Embed(title="Hiba", description=f"Nincs jogod a parancs használatához! Ehhez kell: `{error.missing_perms}`", color=nextcord.Color.red(), timestamp=datetime.datetime.utcnow())
-        embed.set_footer(text="Radon × Hiányzó jog", icon_url=ctx.author.avatar_url)
+        embed.set_footer(text="Rebus × Hiányzó jog", icon_url=ctx.author.avatar_url)
         await ctx.send(embed=embed, mention_author=False)
     elif isinstance(error, commands.ChannelNotFound):
         embed = nextcord.Embed(title="Hiba történt!", description=f"Ez a csatorna nem található!", color=nextcord.Colour.red(), timestamp=datetime.datetime.utcnow())

@@ -9,11 +9,13 @@ import psutil
 import platform
 from nextcord import *
 from nextcord.ext import commands
-from nextcord.ui import Button, View
+from nextcord.ui import Button, View, Select
+from typing import Optional, Set
 
 intents = nextcord.Intents().all()
 
 bot = commands.Bot(command_prefix = "-", help_command = None, intents = intents)
+
 
 class Commands(commands.Cog):
     def __init__(self, bot):
@@ -586,17 +588,6 @@ class Commands(commands.Cog):
         @commands.command()
         async def ping(ctx):
             await ctx.send(f"{self.bot.latency * 1000:.0f}ms")
-
-helpGuide = json.load(open('./help.json'))
-def createHelpEmbed(pageNum=0, inline=False):
-	pageNum = (pageNum) % len(list(helpGuide))
-	pageTitle = list(helpGuide)[pageNum]
-	embed=Embed(color=0x0080ff, title=pageTitle)
-	for key, val in helpGuide[pageTitle].items():
-		embed.add_field(name=bot.command_prefix+key, value=val, inline=inline)
-		embed.set_footer(text=f"Page {pageNum+1} of {len(list(helpGuide))}")
-	return embed
-
 # Tulajdonosi parancsok
         
 @commands.command(usage=["eval [parancs]"])
