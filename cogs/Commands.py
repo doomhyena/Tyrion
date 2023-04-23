@@ -87,7 +87,7 @@ class Commands(commands.Cog):
                     embed.add_field(name="Általa", value=ctx.author, inline=False)
                     embed.add_field(name="Indok", value=f"`{reason}`", inline=False)
                     embed.set_author(name="Ki lettél tiltva!", icon_url=ctx.guild.icon_url)
-                    embed.set_footer(text="Radon × Kitiltás", icon_url=self.bot.user.display_avatar)
+                    embed.set_footer(text="Rebus × Kitiltás", icon_url=self.bot.user.display_avatar)
                     await member.send(embed=embed)
                 except: pass
                 await ctx.guild.ban(user=member, reason=reason, delete_message_days=0)
@@ -261,7 +261,7 @@ class Commands(commands.Cog):
                     embed.add_field(name="Általa", value=ctx.author, inline=False)
                     embed.add_field(name="Indok", value=f"`{reason}`", inline=False)
                     embed.set_author(name="Ki lettél tiltva!", icon_url=ctx.guild.icon_url)
-                    embed.set_footer(text="Radon × Kitiltás", icon_url=self.bot.user.display_avatar)
+                    embed.set_footer(text="Rebus × Kitiltás", icon_url=self.bot.user.display_avatar)
                     await member.send(embed=embed)
                 except: pass
                 await ctx.guild.ban(user=member, reason=reason, delete_message_days=7)
@@ -299,7 +299,7 @@ class Commands(commands.Cog):
                         embed.add_field(name="Általa", value=ctx.author, inline=False)
                         embed.add_field(name="Indok", value=f"`{reason}`", inline=False)
                         embed.set_author(name="Ki lettél tiltva!", icon_url=ctx.guild.icon_url)
-                        embed.set_footer(text="Radon × Kitiltás", icon_url=self.bot.user.display_avatar)
+                        embed.set_footer(text="Rebus × Kitiltás", icon_url=self.bot.user.display_avatar)
                         await member.send(embed=embed)
                     except: pass
                     await ctx.guild.ban(user=member, reason=reason, delete_message_days=0)
@@ -346,7 +346,7 @@ class Commands(commands.Cog):
                     for i in ctx.guild.channels: await i.edit(overwrites=overwrites)
                     await msg.delete()
                 try: ido=convert(ido)
-                except: await ctx.reply("<:radon_x:856423841667743804> Helytelen időformátum!", mention_author=False); return
+                except: await ctx.reply("<:Rebus_x:856423841667743804> Helytelen időformátum!", mention_author=False); return
                 await member.add_roles(nextcord.utils.get(ctx.guild.roles, name="Némított"))
                 await ctx.reply(embed=embed, mention_author=False)
                 await asyncio.sleep(ido)
@@ -362,7 +362,7 @@ class Commands(commands.Cog):
     async def ticket(self, ctx, csatorna: nextcord.TextChannel):
         components1 = [ Button(label=":ticket:"), Button(label=":lock:") ]
         embed=nextcord.Embed(title="Ticket", description="Reagálj a :ticket: emojival a ticket létrehozásához!", color=0xff9900)
-        embed.set_footer(icon_url=self.client.user.avatar_url, text="Radon × Ticket")
+        embed.set_footer(icon_url=self.client.user.avatar_url, text="Rebus × Ticket")
         global msg
         msg = await csatorna.send(embed=embed, components=components1[0])
         interaction = await self.client.wait_for("button_click")
@@ -403,7 +403,7 @@ class Commands(commands.Cog):
                 del data["ticket-channel-ids"][index]
                 with open('data.json', 'w') as f: json.dump(data, f)
 
-    @commands.command(usage="unban [felhasználónév és tag, pl. Radon#6074", aliases=["ub", "felold", "kitiltasfelold", "kitiltásfelold", "feloldás"])
+    @commands.command(usage="unban [felhasználónév és tag, pl. Rebus#4799", aliases=["ub", "felold", "kitiltasfelold", "kitiltásfelold", "feloldás"])
     async def unban(self, ctx, user):
         if ctx.author.guild_permissions.ban_members == False: 
             perm = "Tagok kitiltása"
@@ -490,7 +490,7 @@ class Commands(commands.Cog):
         if num == 2:
             await ctx.send("Írás!")
 
-    @commands.command(aliases=["dobokocka", "baszdfejbemagadat"])
+    @commands.command(aliases=["dobokocka"])
     async def dice(self, ctx):
         await ctx.send(f"🎲 {random.randint(1, 6)}")
 
@@ -501,14 +501,14 @@ class Commands(commands.Cog):
                                     description=f"{ctx.author.mention} IQ-ja: **{random.randint(60, 230)}** IQ pont. Büszkék vagyunk rád.",
                                     color=0xe9b703,
                                     timestamp=datetime.datetime.utcnow())
-            embed.set_footer(text="Radon × IQ", icon_url=ctx.author.display_avatar)
+            embed.set_footer(text="Rebus × IQ", icon_url=ctx.author.display_avatar)
             await ctx.reply(embed=embed, mention_author=False)
         else:
             try:
                 member = await commands.MemberConverter().convert(ctx, member)
             except: 
-                embed = nextcord.Embed(description="Nem található ilyen felhasználó! <:radon_x:811191514482212874>", color=0xFF9900, timestamp=datetime.datetime.utcnow())
-                embed.set_author(name=f"Radon × Hiba", icon_url=ctx.author.display_avatar)
+                embed = nextcord.Embed(description="Nem található ilyen felhasználó! ", color=0xFF9900, timestamp=datetime.datetime.utcnow())
+                embed.set_author(name=f"Rebus × Hiba", icon_url=ctx.author.display_avatar)
                 await ctx.reply(embed=embed)
                 return
             embed = nextcord.Embed(title="IQ", description=f"{member.mention} IQ-ja: **{random.randint(60, 170)}** IQ pont. Büszkék vagyunk rád.", color=0xe9b703, timestamp=datetime.datetime.utcnow())

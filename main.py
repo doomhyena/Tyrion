@@ -18,17 +18,19 @@ async def on_ready():
     print('Bejelentkezve mint: {0} ({0.id})'.format(bot.user))
     await bot.change_presence(activity=nextcord.Game(name="Kezdésnek írd be, hogy: -help"))
 
-
 @bot.event
 async def on_command_error(ctx, error):
     command = bot.get_command(str(ctx.message.content).replace(",", ""))
     if isinstance(error, commands.MissingRequiredArgument):
+        if command is None:
+            return
         if command.usage == None: command.usage = "Nincs használat megadva."
         embed = nextcord.Embed(title="Helytelen használat!", description=f"`Használat: {command.usage}`", color=nextcord.Colour.red(), timestamp=datetime.datetime.utcnow())
         await ctx.reply(embed=embed, mention_author=False)
-    elif isinstance(nextcord, commands.BotMissingPermissions):
+    elif isinstance(error, commands.BotMissingPermissions):
         embed = nextcord.Embed(title="Hiányzó jogosultság", description=f"A botnak nincs elegendő jogosultsága!", color=nextcord.Colour.red(), timestamp=datetime.datetime.utcnow())
         await ctx.reply(embed=embed, mention_author=False)
+
     elif isinstance(error, commands.BadArgument):
         if command.usage == None: command.usage = "Nincs használat megadva."
         embed = nextcord.Embed(title="Helytelen használat!", description=f"`Használat: {command.usage}`", color=nextcord.Colour.red(), timestamp=datetime.datetime.utcnow())
